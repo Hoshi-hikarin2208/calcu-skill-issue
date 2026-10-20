@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#edf0e9">
+  <title>Dahan-Dahan | Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="masthead">
+      <a class="wordmark" href="./" aria-label="Dahan-Dahan home">
+        <span class="wordmark-mark" aria-hidden="true">D</span>
+        <span>DAHAN-DAHAN</span>
+      </a>
+      <span class="edition">CALCULATOR <span>01</span></span>
+    </header>
+
+    <main class="workbench">
+      <section class="calculator" aria-label="Calculator">
+        <div class="calculator-topline">
+          <span>CALCULATION</span>
+          <span class="live-indicator"><i></i> READY</span>
+        </div>
+
+        <div class="display" aria-live="polite" aria-atomic="true">
+          <div id="expression" class="expression">&nbsp;</div>
+          <output id="display-value" class="display-value">0</output>
+        </div>
+
+        <div class="keypad" aria-label="Calculator keys">
+          <button class="key key-utility" data-key="clear" aria-label="Clear">AC</button>
+          <button class="key key-utility" data-key="sign" aria-label="Change sign">+/-</button>
+          <button class="key key-utility" data-key="percent" aria-label="Percent">%</button>
+          <button class="key key-operator" data-key="divide" aria-label="Divide">÷</button>
+
+          <button class="key" data-digit="7">7</button>
+          <button class="key" data-digit="8">8</button>
+          <button class="key" data-digit="9">9</button>
+          <button class="key key-operator" data-key="multiply" aria-label="Multiply">×</button>
+
+          <button class="key" data-digit="4">4</button>
+          <button class="key" data-digit="5">5</button>
+          <button class="key" data-digit="6">6</button>
+          <button class="key key-operator" data-key="subtract" aria-label="Subtract">−</button>
+
+          <button class="key" data-digit="1">1</button>
+          <button class="key" data-digit="2">2</button>
+          <button class="key" data-digit="3">3</button>
+          <button class="key key-operator" data-key="add" aria-label="Add">+</button>
+
+          <button class="key" data-key="decimal" aria-label="Decimal point">.</button>
+          <button class="key" data-digit="0">0</button>
+          <button class="key" data-key="backspace" aria-label="Backspace">DEL</button>
+          <button class="key key-equals" data-key="equals" aria-label="Equals">=</button>
+        </div>
+
+        <p class="keyboard-hint">KEYBOARD READY <span>ENTER = PLAY</span></p>
+      </section>
+
+      <section class="listening-room" aria-label="Song and lyrics">
+        <div class="track-heading">
+          <div>
+            <p class="eyebrow">NOW PLAYING</p>
+            <h1>Dahan-Dahan</h1>
+          </div>
+          <span class="track-number">SIDE A <b>01</b></span>
+        </div>
+
+        <div class="visualizer-wrap">
+          <canvas id="visualizer" aria-label="Audio waveform visualizer"></canvas>
+          <span class="visualizer-caption">DAHAN.MP3</span>
+        </div>
+
+        <div class="lyric-stage" aria-live="polite" aria-atomic="true">
+          <p class="eyebrow">LYRICS</p>
+          <p id="lyric-line" class="lyric-line">Press play or calculate to begin.</p>
+        </div>
+
+        <div class="player">
+          <div class="player-buttons">
+            <button id="play-button" class="play-button" type="button">Play lyrics + song</button>
+            <button id="stop-button" class="stop-button" type="button">Stop</button>
+          </div>
+          <div class="track-progress" role="progressbar" aria-label="Song progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span id="progress-fill"></span>
+          </div>
+          <div class="player-meta">
+            <span id="player-status">READY</span>
+            <span id="track-time">0:00 / 0:00</span>
+          </div>
+        </div>
+
+        <audio id="song" preload="metadata" src="song/dahan.mp3"></audio>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <span>DAHAN-DAHAN</span>
+      <span>TAKE YOUR TIME</span>
+    </footer>
+  </div>
+</body>
+</html>

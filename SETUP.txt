@@ -1,11 +1,8 @@
+To use the website locally, open index.html or run `python3 -m http.server 8000` and visit http://localhost:8000.
 Put your MP3 at song/dahan.mp3 and keep the song folder beside calculetime.jar and lyrics.txt.
 Install FFmpeg and make sure ffplay is available on PATH for MP3 playback.
 The song begins with the first lyric and stops when the lyrics end or a calculator button is pressed.
 
-lyrics.txt format: one line per row, lines starting with # are ignored.
-To set how long a line stays on screen, start it with milliseconds and a bar:
-    5200|your line here
-Lines without a time use the default (4 seconds, changeable in the app's settings panel).
+For GitHub Pages, push index.html, app.js, styles.css, lyrics.txt, and song/dahan.mp3 to the repository. In Settings > Pages, select Deploy from a branch and choose the repository branch with the /(root) folder.
 
-To make the music begin partway into the song, open the app's settings panel
-and set "Start audio at (seconds)".
+Lyrics are read from lyrics.txt, one line per row. Lines starting with # are ignored. Prefix a line with milliseconds and a bar to change its duration, for example `5200|your lyric here`.

@@ -1,9 +1,13 @@
 # Dahan-Dahan Calculator
 
-A dark-themed Java Swing calculator. After you press `=`, it shows your answer, then types out song lines one by one on the display.
+A browser-based calculator with synchronized lyrics and MP3 playback. It is a static site, so GitHub Pages can host it without a server or build step. The Java Swing version remains in `calculetime.java` for desktop use.
 
-## Files
+## Run locally
 
+Open `index.html` in a browser, or serve the folder locally:
+
+```sh
+python3 -m http.server 8000
 | File | What it is |
 |------|------------|
 | `calculetime.java` | Source code |
@@ -33,42 +37,24 @@ printf 'Main-Class: calculetime\n' > manifest.txt
 jar cfm calculetime.jar manifest.txt *.class
 ```
 
-## Adding your lyrics
+Then visit `http://localhost:8000`.
 
-Open `lyrics.txt` and put one line per row. Lines starting with `#` are ignored.
+## Publish with GitHub Pages
 
-To control the timing of a line, start it with the number of milliseconds and a bar:
-
-```
-5200|your line here
-```
-
-A line without a time uses the default of 4 seconds.
-
-## Adjusting the timing
-
-At the top of `calculetime.java`:
-
-| Setting | Default | Meaning |
-|---------|---------|---------|
-| `DEFAULT_LINE_MS` | 4000 | Total time each line stays on screen |
-| `TYPING_PORTION` | 0.6 | Share of that time spent typing (the rest is a pause) |
-| `START_DELAY_MS` | 1500 | How long your answer shows before the lyrics begin |
-
-Pressing any button stops the lyrics and resets the display.
-
+1. Push the repository contents to GitHub, including `index.html`, `app.js`, `styles.css`, `lyrics.txt`, and `song/dahan.mp3`.
+2. In the repository, open **Settings → Pages**.
+3. Under **Build and deployment**, choose **Deploy from a branch**, select your branch and the `/ (root)` folder, then save.
+4. Open the site URL shown on the Pages settings screen. It will look like `https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/`.
 ## Adding the song
 
 Put your MP3 in the `song` folder and name it `dahan.mp3`. The app also accepts `song.mp3`. Audio starts when the first lyric appears and stops when the lyrics end or you press a calculator button. Install FFmpeg on the computer running the app; the Java program uses its `ffplay` command for MP3 playback. If the MP3 or `ffplay` is missing, lyrics still play without audio.
 
 ## Buttons
 
-`C` clear, `⌫` backspace, `±` change sign, `%` percent, `+ − × ÷`, `=`.
+The MP3 is a separate file, so make sure it is included in the commit and pushed to GitHub. Audio starts when you press `=` or **Play lyrics + song**. Browser playback uses the built-in audio player and does not require FFmpeg.
 
-## Put it on GitHub
+## Lyrics and timing
 
-1. Create a repo and upload `calculetime.java`, `lyrics.txt` and `README.md`.
-2. Go to **Releases → Create a new release**, attach `calculetime.jar` and `lyrics.txt`.
-3. Anyone can download both files into one folder and double-click the jar.
+Edit `lyrics.txt`, one lyric per line. Lines starting with `#` are ignored. To customize the display duration, add milliseconds and a bar before a line, for example `5200|your lyric here`. Untimed lines display for four seconds.
 
-GitHub can't run a desktop Java app from a link. For a version that opens in the browser, the calculator would need to be rewritten as a web page (GitHub Pages).
+The calculator also supports keyboard input: number keys, `+`, `-`, `*`, `/`, `%`, decimal point, Enter, Backspace, and Escape.
