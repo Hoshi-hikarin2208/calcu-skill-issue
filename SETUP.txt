@@ -1,0 +1,9 @@
+Put song.mp3 and lyrics.txt in the same folder as index.html (same GitHub repo folder).
+
+lyrics.txt format: one line per row, lines starting with # are ignored.
+To set how long a line stays on screen, start it with milliseconds and a bar:
+    5200|your line here
+Lines without a time use the default (4 seconds, changeable in the app's settings panel).
+
+To make the music begin partway into the song, open the app's settings panel
+and set "Start audio at (seconds)".

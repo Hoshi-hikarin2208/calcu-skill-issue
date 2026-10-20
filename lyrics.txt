@@ -1,0 +1,7 @@
+# Put your song lines here, one per line. Lines starting with # are ignored.
+#
+# Each line uses the default time (DEFAULT_LINE_MS in calculetime.java, 4 seconds).
+# To set your own timing for a line, start it with milliseconds and a bar:
+#     5200|your line here
+#
+# Save this file in the same folder as calculetime.jar, then restart the app.
