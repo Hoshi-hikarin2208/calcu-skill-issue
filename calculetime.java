@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.border.EmptyBorder;
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class calculetime extends JFrame {
 
     private final List<String> lyrics = new ArrayList<>();
     private javax.swing.Timer lyricTimer;
+    private Process audioProcess;
 
     private final Color BACKGROUND = new Color(18, 18, 20);
     private final Color DISPLAY_BG = new Color(25, 25, 28);
@@ -265,7 +267,10 @@ public class calculetime extends JFrame {
         lyricTimer = new javax.swing.Timer(30, null);
         lyricTimer.setInitialDelay(START_DELAY_MS);
         lyricTimer.addActionListener(e -> {
-            if (start[0] == 0) start[0] = System.currentTimeMillis();
+            if (start[0] == 0) {
+                start[0] = System.currentTimeMillis();
+                startSong();
+            }
             if (idx[0] >= lyrics.size()) {
                 stopLyrics();
                 return;
@@ -297,11 +302,47 @@ public class calculetime extends JFrame {
         lyricTimer.start();
     }
 
+    private void startSong() {
+        List<File> candidates = new ArrayList<>();
+        candidates.add(new File("song/dahan.mp3"));
+        candidates.add(new File("song/song.mp3"));
+        try {
+            File jar = new File(calculetime.class.getProtectionDomain()
+                .getCodeSource().getLocation().toURI());
+            File dir = jar.isDirectory() ? jar : jar.getParentFile();
+            candidates.add(new File(dir, "song/dahan.mp3"));
+            candidates.add(new File(dir, "song/song.mp3"));
+        } catch (Exception ignored) { }
+
+        File song = null;
+        for (File candidate : candidates) {
+            if (candidate.isFile()) {
+                song = candidate;
+                break;
+            }
+        }
+        if (song == null) return;
+
+        try {
+            audioProcess = new ProcessBuilder("ffplay", "-nodisp", "-autoexit",
+                "-loglevel", "error", song.getAbsolutePath())
+                .redirectErrorStream(true)
+                .redirectOutput(ProcessBuilder.Redirect.DISCARD)
+                .start();
+        } catch (IOException e) {
+            System.err.println("Could not play song/song.mp3. Install FFmpeg (ffplay) and ensure it is on PATH.");
+        }
+    }
+
     private void stopLyrics() {
         if (lyricTimer != null && lyricTimer.isRunning()) {
             lyricTimer.stop();
             display.setText("0");
             newNumber = true;
+        }
+        if (audioProcess != null) {
+            audioProcess.destroy();
+            audioProcess = null;
         }
     }
 

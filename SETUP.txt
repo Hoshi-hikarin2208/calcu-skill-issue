@@ -1,4 +1,6 @@
-Put song.mp3 and lyrics.txt in the same folder as index.html (same GitHub repo folder).
+Put your MP3 at song/dahan.mp3 and keep the song folder beside calculetime.jar and lyrics.txt.
+Install FFmpeg and make sure ffplay is available on PATH for MP3 playback.
+The song begins with the first lyric and stops when the lyrics end or a calculator button is pressed.
 
 lyrics.txt format: one line per row, lines starting with # are ignored.
 To set how long a line stays on screen, start it with milliseconds and a bar:
