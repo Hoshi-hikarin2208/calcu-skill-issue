@@ -9,15 +9,17 @@ A dark-themed Java Swing calculator. After you press `=`, it shows your answer, 
 | `calculetime.java` | Source code |
 | `calculetime.jar` | Ready-to-run app (double-click to open) |
 | `lyrics.txt` | Your song lines, read when the app starts |
+| `song/dahan.mp3` | MP3 played while the lyrics display |
 | `README.md` | This file |
 
 ## Requirements
 
 Java 11 or newer (JRE or JDK).
+To play MP3 audio, install FFmpeg so `ffplay` is available on your PATH.
 
 ## Run it
 
-Keep `calculetime.jar` and `lyrics.txt` in the same folder, then either double-click the jar or run:
+Keep `calculetime.jar`, `lyrics.txt`, and the `song` folder together, then either double-click the jar or run:
 
 ```
 java -jar calculetime.jar
@@ -54,6 +56,10 @@ At the top of `calculetime.java`:
 | `START_DELAY_MS` | 1500 | How long your answer shows before the lyrics begin |
 
 Pressing any button stops the lyrics and resets the display.
+
+## Adding the song
+
+Put your MP3 in the `song` folder and name it `dahan.mp3`. The app also accepts `song.mp3`. Audio starts when the first lyric appears and stops when the lyrics end or you press a calculator button. Install FFmpeg on the computer running the app; the Java program uses its `ffplay` command for MP3 playback. If the MP3 or `ffplay` is missing, lyrics still play without audio.
 
 ## Buttons
 
